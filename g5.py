@@ -10,7 +10,7 @@ debug=0
 #          ttyAMA0:0042 004d 0014 0022 0033
 #          ttyUSB0:4d42 1400 2500 2f00
 
-class g3sensor():
+class g5sensor():
     def __init__(self):
         if debug: print "init"
 	self.endian = sys.byteorder
@@ -84,7 +84,7 @@ class g3sensor():
             return self.data
 
 if __name__ == '__main__': 
-    air=g3sensor()
+    air=g5sensor()
     while True:
         pmdata=0
         try:
