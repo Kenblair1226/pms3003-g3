@@ -13,8 +13,8 @@ debug=0
 class g5sensor():
     def __init__(self):
         if debug: print "init"
-	self.endian = sys.byteorder
-    
+	    self.endian = sys.byteorder
+
     def conn_serial_port(self, device):
         if debug: print device
         self.serial = serial.Serial(device, baudrate=9600)
@@ -34,27 +34,27 @@ class g5sensor():
     	        if token2_hex == '4d':
     	            if debug: print "get 4d"
                     return True
-		elif token2_hex == '00': # fixme
-		    if debug: print "get 00"
-		    token3 = self.serial.read()
-		    token3_hex=token3.encode('hex')
-		    if token3_hex == '4d':
-			if debug: print "get 4d"
-			return True
-		    
+    		elif token2_hex == '00': # fixme
+    		    if debug: print "get 00"
+    		    token3 = self.serial.read()
+    		    token3_hex=token3.encode('hex')
+    		    if token3_hex == '4d':
+        			if debug: print "get 4d"
+        			return True
+
     def vertify_data(self, data):
-	if debug: print data
+    	if debug: print data
         n = 2
-	sum = int('42',16)+int('4d',16)
+    	sum = int('42',16)+int('4d',16)
         for i in range(0, len(data)-4, n):
-            #print data[i:i+n]
-	    sum=sum+int(data[i:i+n],16)
-	versum = int(data[40]+data[41]+data[42]+data[43],16)
-	if debug: print sum
+                #print data[i:i+n]
+    	    sum=sum+int(data[i:i+n],16)
+    	versum = int(data[40]+data[41]+data[42]+data[43],16)
+    	if debug: print sum
         if debug: print versum
-	if sum == versum:
-	    print "data correct"
-	
+    	if sum == versum:
+    	    print "data correct"
+
     def read_data(self):
         data = self.serial.read(22)
         data_hex=data.encode('hex')
@@ -83,15 +83,14 @@ class g5sensor():
             if debug: print self.data
             return self.data
 
-if __name__ == '__main__': 
+if __name__ == '__main__':
     air=g5sensor()
     while True:
         pmdata=0
         try:
             pmdata=air.read("/dev/ttyAMA0")
-        except: 
+        except:
             next
         if pmdata != 0:
             print pmdata
             break
-
