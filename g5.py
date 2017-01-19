@@ -56,7 +56,7 @@ class g5sensor():
     	    print "data correct"
 
     def read_data(self):
-        data = self.serial.read(22)
+        data = self.serial.read(32)
         data_hex=data.encode('hex')
         if debug: self.vertify_data(data_hex)
         pm1_cf=int(data_hex[4]+data_hex[5]+data_hex[6]+data_hex[7],16)
@@ -65,13 +65,19 @@ class g5sensor():
         pm1=int(data_hex[16]+data_hex[17]+data_hex[18]+data_hex[19],16)
         pm25=int(data_hex[20]+data_hex[21]+data_hex[22]+data_hex[23],16)
         pm10=int(data_hex[24]+data_hex[25]+data_hex[26]+data_hex[27],16)
+        particle03=int(data_hex[28]+data_hex[29]+data_hex[30]+data_hex[31],16)
+        particle05=int(data_hex[32]+data_hex[33]+data_hex[34]+data_hex[35],16)
+        particle10=int(data_hex[36]+data_hex[37]+data_hex[38]+data_hex[39],16)
+        particle25=int(data_hex[40]+data_hex[41]+data_hex[42]+data_hex[43],16)
+        particle50=int(data_hex[44]+data_hex[45]+data_hex[46]+data_hex[47],16)
+        particle99=int(data_hex[48]+data_hex[49]+data_hex[50]+data_hex[51],16)
         if debug: print "pm1_cf: "+str(pm1_cf)
         if debug: print "pm25_cf: "+str(pm25_cf)
         if debug: print "pm10_cf: "+str(pm10_cf)
         if debug: print "pm1: "+str(pm1)
         if debug: print "pm25: "+str(pm25)
         if debug: print "pm10: "+str(pm10)
-        data = [pm1_cf, pm10_cf, pm25_cf, pm1, pm10, pm25]
+        data = [pm1_cf, pm10_cf, pm25_cf, pm1, pm10, pm25, particle03, particle05, particle10, particle25, particle50, particle99]
     	self.serial.close()
         return data
 
