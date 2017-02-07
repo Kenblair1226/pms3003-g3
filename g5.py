@@ -13,7 +13,7 @@ debug=0
 class g5sensor():
     def __init__(self):
         if debug: print "init"
-	    self.endian = sys.byteorder
+	self.endian = sys.byteorder
 
     def conn_serial_port(self, device):
         if debug: print device
